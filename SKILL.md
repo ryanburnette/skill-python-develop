@@ -35,6 +35,14 @@ docker build -t my-app .
 docker run --rm my-app
 ```
 
+With environment variables:
+
+```sh
+docker run --rm -v "$PWD":/app -w /app -e API_KEY=... python:3.13-slim python script.py
+# or from a file:
+docker run --rm -v "$PWD":/app -w /app --env-file .env python:3.13-slim python script.py
+```
+
 Interactive REPL:
 
 ```sh
