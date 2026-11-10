@@ -1,13 +1,18 @@
 ---
 name: python-develop
-description: Python development via Docker. Use when writing Python scripts, tools, or apps. Never install Python or packages on the host — always run in Docker to keep the local environment clean.
+description: Python development via Docker. Use when writing project Python scripts, tools, or apps. Run project runtimes, dependencies, tests, and builds in Docker; installed agent tooling may run on the host.
 ---
 
 ## Core Rule
 
-Never install Python, pip, or any Python packages on the host machine. All Python
-runs inside Docker. No `brew install python`, no `pip install`, no virtualenvs on
+Run project Python scripts, dependencies, tests, and builds inside Docker.
+Do not install project runtimes or packages, or create project virtualenvs, on
 the host.
+
+Existing agent and host tools, including bundled Python helpers, may run on the
+host. Installing or updating such tooling is allowed only when requested or
+required by an authorized setup task, following that tool's instructions. This
+exception does not permit installing project dependencies on the host.
 
 ## Running Python
 
@@ -88,9 +93,7 @@ Run with: `docker compose run --rm app`
 
 ## Guardrails
 
-- NEVER run `brew install python` or any host-level Python install
-- NEVER run `pip install` outside a container
-- NEVER create virtualenvs on the host
+- Do not install project Python runtimes, packages, or virtualenvs on the host; the host-tooling exception above applies only to authorized agent/host tool maintenance
 - ALWAYS use `python:3.13-slim` or a project-specified image
 - ALWAYS pin dependency versions in `requirements.txt`
 - ALWAYS use `--rm` for one-off containers to avoid accumulation
